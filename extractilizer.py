@@ -20,9 +20,11 @@ print("Reading input file %s" % (args.infile))
 with open(args.infile) as f:
     filenames = f.readlines()
 filenames = map(lambda x: x.strip(), filenames)
+filenames = filter(lambda x: not x.startswith('#'), filenames)
 
 print("Read %d filenames from %s" % (len(filenames), args.infile))
+filenum = 1
 for filename in filenames:
     print("Extracting from %s" %(filename))
-    extract_audio(filename, "%s/out.wav" % (args.outdir))
-    
+    extract_audio(filename, "%s/out%d.wav" % (args.outdir, filenum))
+    filenum = filenum + 1
