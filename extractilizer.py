@@ -6,7 +6,8 @@ from ffmpeg_util import *
 parser = argparse.ArgumentParser()
 
 parser.add_argument("infile", help="the input file containing video files, one per line")
-parser.add_argument("-n", "--numfiles", default="48", help="number of files per dir (defualt=48)")
+parser.add_argument("-m", "--minutes", default=10, type=int, help="minutes per split output file (default = 10)")
+#parser.add_argument("-n", "--numfiles", default="48", help="number of files per dir (defualt=48)")
 parser.add_argument("-o", "--outdir", default="output", help="output dir (default=output)")
 args = parser.parse_args()
 
@@ -27,7 +28,8 @@ filenum = 1
 for filename in filenames:
     print("Extracting from %s" %(filename))
     extracted = "%s/out%d.wav" % (args.outdir, filenum)
-    #extract_audio(filename, extracted)
+    extract_audio(filename, extracted)
     normalized = "%s/out%d_normalized.wav" % (args.outdir, filenum)
     normalize_audio(extracted, normalized)
+    split_file(normalized, args.minutes, "%s/out%d_split" % (args.outdir, filenum))
     filenum = filenum + 1
