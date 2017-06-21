@@ -26,5 +26,8 @@ print("Read %d filenames from %s" % (len(filenames), args.infile))
 filenum = 1
 for filename in filenames:
     print("Extracting from %s" %(filename))
-    extract_audio(filename, "%s/out%d.wav" % (args.outdir, filenum))
+    extracted = "%s/out%d.wav" % (args.outdir, filenum)
+    #extract_audio(filename, extracted)
+    normalized = "%s/out%d_normalized.wav" % (args.outdir, filenum)
+    normalize_audio(extracted, normalized)
     filenum = filenum + 1
