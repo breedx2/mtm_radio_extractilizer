@@ -40,9 +40,9 @@ filenum = 1
 for input_item in input_items:
     print(input_item)
     print("Extracting stream %d from %s" % (input_item['stream'], input_item['filename']))
-    extracted = "%s/out%d.wav" % (args.outdir, filenum)
+    extracted = "%s/out%03d.wav" % (args.outdir, filenum)
     extract_audio(input_item['stream'], input_item['filename'], extracted)
-    normalized = "%s/out%d_normalized.wav" % (args.outdir, filenum)
+    normalized = "%s/out%03d_normalized.wav" % (args.outdir, filenum)
     normalize_audio(extracted, normalized)
-    split_file(normalized, args.minutes, "%s/out%d_split" % (args.outdir, filenum))
+    split_file(normalized, args.minutes, "%s/out%03d_split" % (args.outdir, filenum))
     filenum = filenum + 1
