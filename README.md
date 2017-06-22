@@ -26,6 +26,12 @@ $ source env/bin/activate
 
 tbd
 
+# Input file format
+
+one per line
+can start with stream:filename
+tbd
+
 # Limitations
 
 Multi-language streams aren't really supported yet.  I suppose it just uses the first stream.

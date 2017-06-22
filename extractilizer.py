@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
 import os
+import re
 from ffmpeg_util import *
 
 parser = argparse.ArgumentParser()
@@ -23,12 +24,24 @@ with open(args.infile) as f:
 filenames = map(lambda x: x.strip(), filenames)
 filenames = filter(lambda x: not x.startswith('#'), filenames)
 
-print("Read %d filenames from %s" % (len(filenames), args.infile))
+def stream_from_filename(filename):
+    if(re.match(r'^\d+:', filename)):
+        return int(re.sub(r'^(\d+).*', r'\1', filename))
+    return 0
+
+def build_input(filename):
+    stream = stream_from_filename(filename)
+    return { 'filename': re.sub(r'^\d+:', '', filename), 'stream': stream }
+
+input_items = map(build_input, filenames)
+
+print("Read %d filenames from %s" % (len(input_items), args.infile))
 filenum = 1
-for filename in filenames:
-    print("Extracting from %s" %(filename))
+for input_item in input_items:
+    print(input_item)
+    print("Extracting stream %d from %s" % (input_item['stream'], input_item['filename']))
     extracted = "%s/out%d.wav" % (args.outdir, filenum)
-    extract_audio(filename, extracted)
+    extract_audio(input_item['stream'], input_item['filename'], extracted)
     normalized = "%s/out%d_normalized.wav" % (args.outdir, filenum)
     normalize_audio(extracted, normalized)
     split_file(normalized, args.minutes, "%s/out%d_split" % (args.outdir, filenum))

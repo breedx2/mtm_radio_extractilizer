@@ -11,10 +11,13 @@ import re
 # split
 # ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
 
-def extract_audio(infile, outfile):
+def extract_audio(stream, infile, outfile):
     print("Extracting from %s" %(infile))
-    cmd = ["ffmpeg", "-hide_banner", "-i", infile, "-acodec", "pcm_s16le", "-ar", "44100",
-        "-ac", "1", "-af", "silenceremove=0:0:0:-1:0.5:-50dB", "-y", outfile]
+    cmd = ["ffmpeg", "-hide_banner", "-probesize", "250M", "-analyzeduration", "250M",
+        "-i", infile, "-acodec", "pcm_s16le", "-ar", "44100"]
+    if(stream != 0):
+        cmd = cmd + ["-map", "0:%d" %(stream)]
+    cmd = cmd + ["-ac", "1", "-af", "silenceremove=0:0:0:-1:0.5:-50dB", "-y", outfile]
     print(' '.join(cmd))
     subprocess.check_call(cmd)
 
