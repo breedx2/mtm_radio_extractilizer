@@ -58,7 +58,7 @@ For each file in the input file:
 * Extract the audio stream to a file
   * Remove all silence below -50dB for 0.5 seconds
 * Normalize audio by amplifying the peak to 0dB
-* Split the normalized file into chunks of <n> minutes
+* Split the normalized file into minute-based chunks
 
 filesystem layout/org tbd
 
