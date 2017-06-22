@@ -2,15 +2,6 @@
 import subprocess
 import re
 
-# avconv -i tears_of_steel.mkv -map 0:2 -acodec libmp3lame -ar 44100 -ac 2 -ab 192k some.mp3
-# https://ffmpeg.org/ffmpeg-filters.html#silenceremove
-
-#ffmpeg -i o2/out.wav -af volumedetect -f null /dev/null 2>&1 | grep max_volume | awk '{ print $5 }'
-#ffmpeg -i o2/out.wav -af "volume=12.3dB" o2/norm.wav
-
-# split
-# ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
-
 def extract_audio(stream, infile, outfile):
     print("Extracting from %s" %(infile))
     cmd = ["ffmpeg", "-hide_banner", "-probesize", "250M", "-analyzeduration", "250M",
