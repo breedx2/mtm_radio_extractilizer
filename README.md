@@ -1,10 +1,11 @@
 # What?
 
-A tool to extract audio files for use with the Music Thing Modular
+A tool to extract audio files from video files -- for use with the Music Thing Modular
 Radio Music.  https://github.com/TomWhitwell/RadioMusic
 
 Feed it a file full of video files, and it will extract the audios
-into wav format and distribute them (in order) into a set of directories.
+into wav format and distribute them (in order) into a set of directories,
+suitable for copying to an SD card.
 
 # Setup
 
@@ -13,11 +14,13 @@ into wav format and distribute them (in order) into a set of directories.
 * python - I used 2.7.13
 * ffmpeg - must be in $PATH
 * some video files you want to extract audio from
+* bunch of disk space
 
 # Input file format
 
-Prepare an input text file that tells the extractilizer what audios you want to extract.
-The format is one file per line.  You can optionally specify an audio stream number
+Prepare an input text file that tells the extractilizer what videos you want to
+extract audio from.
+The format is one video file per line.  You can optionally specify an audio stream number
 and a colon at the beginning of the file.  It might look like this:
 
 ```
@@ -49,7 +52,7 @@ optional arguments:
 ## Example
 
 ```
-$ ./extractilizer.py -m 15 -o o2 files.txt
+$ ./extractilizer.py -m 15 -o o2 videos.txt
 ```
 
 # How it works
@@ -69,5 +72,8 @@ filesystem layout/org tbd
 * Parameters around silence detection are hard-coded, should make parametric
 * Crashes hard -- could be made more flexible/recoverable/resumable
 * Volume normalization is very basic, and increases the noise floor?  Maybe some users would like one of the more sophisticated/dynamic normalizers?
+* Make number of banks a param, in case user doesn't want to make all 16?
 
 Please fork me and make me better!
+
+Did you try it out?  Let me know how it went: jason@noisybox.net
