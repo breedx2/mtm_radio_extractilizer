@@ -15,6 +15,7 @@ suitable for copying to an SD card.
 * ffmpeg - must be in $PATH
 * some video files you want to extract audio from
 * bunch of disk space
+* recent Radio Music firmware that supports `.wav` files
 
 # Input file format
 
