@@ -24,7 +24,7 @@ def create_card_dir(dir):
         os.mkdir(numdir)
 
 def chunkify_move(split_files, card_dir):
-    files_per_dir = len(split_files)/NUM_DIRS
+    files_per_dir = max([1, len(split_files)/NUM_DIRS])
     # TODO: check if files_per_dir > 48 (that's an err, limitation in radio music firmware)
     print("%d files per directory" % (files_per_dir))
     file_sets = [split_files[i:i+files_per_dir] for i in range(0, len(split_files), files_per_dir)]
