@@ -62,8 +62,9 @@ For each file in the input file:
   * Remove all silence below -50dB for 0.5 seconds
 * Normalize audio by amplifying the peak to 0dB
 * Split the normalized file into minute-based chunks
+* Distribute the files, in order, among 16 numbered output dirs
+  * "Extra" files are loaded into the last dir
 
-filesystem layout/org tbd
 
 # Limitations/improvements
 
